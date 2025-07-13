@@ -1,4 +1,4 @@
-/* Фон и базовые стили */
+/* ===== ОСНОВНЫЕ СТИЛИ ===== */
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
@@ -8,148 +8,299 @@ body {
     background-position: center;
     color: white;
     min-height: 100vh;
+    line-height: 1.6;
 }
 
-/* Затемнение контента для читаемости */
+/* ===== ЛЕЙАУТ ===== */
+header {
+    text-align: center;
+    padding: 25px 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
 main {
     background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(8px);
     border-radius: 15px;
     padding: 30px;
     max-width: 800px;
     margin: 40px auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Шапка */
-header {
+footer {
     text-align: center;
-    padding: 20px 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    margin-bottom: 30px;
+    padding: 25px;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin-top: 40px;
+    font-size: 14px;
 }
 
-/* Комикс */
+/* ===== КОМИКС И ЭЛЕМЕНТЫ ===== */
+.comic-viewer {
+    text-align: center;
+    position: relative;
+}
+
 #comic-image {
     max-width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     margin: 20px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
 }
 
-/* Кнопки */
 .controls {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
-    margin-top: 30px;
+    margin: 30px 0 10px;
+    flex-wrap: wrap;
 }
 
+/* ===== КНОПКИ ===== */
 button {
-    padding: 12px 25px;
-    background: linear-gradient(135deg, #4CAF50, #2E8B57);
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #4CAF50, #3a7d40);
     color: white;
     border: none;
     border-radius: 50px;
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 120px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 7px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #5cbf61, #4CAF50);
 }
 
 button:active {
     transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 button:disabled {
     background: linear-gradient(135deg, #cccccc, #999999);
     cursor: not-allowed;
     transform: none !important;
+    box-shadow: none;
 }
 
-/* Номер страницы */
 #page-number {
     font-size: 18px;
     font-weight: bold;
-    min-width: 120px;
+    min-width: 150px;
     text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 15px;
+    border-radius: 50px;
 }
 
-/* Подвал */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    margin-top: 30px;
-}
-
-/* Адаптивность */
-@media (max-width: 600px) {
-    .controls {
-        flex-direction: column;
-    }
-    button {
-        width: 80%;
-    }
-}
-
-/* Анимации */
-header, main, footer, .controls {
-  opacity: 0;
-  animation: fadeIn 1s ease forwards;
-}
-
-header { animation-delay: 0.3s; }
-main { animation-delay: 0.6s; }
-.controls { animation-delay: 0.9s; }
-footer { animation-delay: 1.2s; }
-
+/* ===== АНИМАЦИИ ===== */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Адаптация изображений */
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+header, main, footer, .controls {
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+}
+
+header { animation-delay: 0.2s; }
+main { animation-delay: 0.4s; }
+.controls { animation-delay: 0.6s; }
+footer { animation-delay: 0.8s; }
+
 #comic-image {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  max-height: 70vh;
-  object-fit: contain;
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 #comic-image.loaded {
-  opacity: 1;
+    opacity: 1;
+    transform: scale(1);
+    animation: scaleIn 0.6s ease;
 }
 
-/* Мобильная версия */
-@media (max-width: 600px) {
-  .comic-viewer { max-height: 65vh; }
-  #comic-image { max-height: 60vh; }
+/* ===== АУДИОПЛЕЕР ===== */
+.audio-player {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 12px 20px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s ease;
 }
+
+.audio-player.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.sound-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 0;
+    min-width: auto;
+    box-shadow: none;
+}
+
+.sound-btn:hover {
+    transform: scale(1.1);
+}
+
+.audio-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 14px;
+    max-width: 0;
+    overflow: hidden;
+    transition: max-width 0.5s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.audio-player:hover .audio-info {
+    max-width: 200px;
+    opacity: 1;
+}
+
+.track-name {
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+#volume {
+    width: 90px;
+    height: 5px;
+    accent-color: #4CAF50;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#volume:hover {
+    accent-color: #5cbf61;
+}
+
 .audio-prompt {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  background: rgba(0, 0, 0, 0.9);
-  color: white;
-  padding: 15px;
-  border-radius: 10px;
-  z-index: 1000;
-  max-width: 200px;
+    position: fixed;
+    bottom: 100px;
+    right: 25px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    z-index: 1001;
+    max-width: 220px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    transform: translateY(10px);
+    opacity: 0;
+    animation: fadeIn 0.5s ease 3s forwards;
 }
+
+.audio-prompt p {
+    margin: 0 0 10px;
+    font-size: 14px;
+}
+
 .audio-prompt button {
-  background: #4CAF50;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  margin-top: 10px;
-  border-radius: 5px;
-  cursor: pointer;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.audio-prompt button:hover {
+    background: #5cbf61;
+    transform: translateY(-2px);
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 768px) {
+    main {
+        margin: 20px 15px;
+        padding: 20px;
+    }
+    
+    .controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    button {
+        width: 100%;
+    }
+    
+    #page-number {
+        order: -1;
+        width: 100%;
+    }
+    
+    .audio-player {
+        bottom: 15px;
+        right: 15px;
+        padding: 10px 15px;
+    }
+    
+    .audio-prompt {
+        bottom: 80px;
+        right: 15px;
+        max-width: calc(100% - 30px);
+    }
+}
+
+@media (max-width: 480px) {
+    #comic-image {
+        max-height: 60vh;
+    }
+    
+    .comic-viewer {
+        max-height: 65vh;
+    }
+    
+    header {
+        padding: 15px 0;
+    }
+    
+    footer {
+        padding: 15px;
+    }
 }
