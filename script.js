@@ -61,3 +61,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+const audio = document.getElementById('ambient');
+const soundBtn = document.getElementById('sound-toggle');
+const volumeControl = document.getElementById('volume');
+
+// Установка громкости
+audio.volume = volumeControl.value;
+
+// Кнопка вкл/выкл
+soundBtn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play()
+      .then(() => soundBtn.textContent = '🔊')
+      .catch(e => console.log('Автозапуск заблокирован'));
+  } else {
+    audio.pause();
+    soundBtn.textContent = '🔇';
+  }
+});
+
+// Регулятор громкости
+volumeControl.addEventListener('input', () => {
+  audio.volume = volumeControl.value;
+});
+
+// Автозапуск при первом клике по сайту
+document.addEventListener('click', initAudio, { once: true });
+
+function initAudio() {
+  audio.play()
+    .then(() => soundBtn.textContent = '🔊')
+    .catch(e => console.log('Браузер заблокировал автозапуск'));
+}
