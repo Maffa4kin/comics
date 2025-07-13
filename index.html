@@ -28,5 +28,15 @@
     </footer>
 
     <script src="script.js"></script>
+    <div class="audio-player">
+  <button id="sound-toggle" class="sound-btn">🔊</button>
+  <div class="audio-info">
+    <span class="track-name">Acid Tunnel of Love</span>
+    <input type="range" id="volume" min="0" max="1" step="0.1" value="0.3">
+  </div>
+  <audio id="ambient" loop>
+    <source src="sounds/acid_tunnel_of_love.mp3" type="audio/mpeg">
+  </audio>
+    </div>
 </body>
 </html>
