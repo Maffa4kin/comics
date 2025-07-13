@@ -61,35 +61,78 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+// Элементы
 const audio = document.getElementById('ambient');
 const soundBtn = document.getElementById('sound-toggle');
 const volumeControl = document.getElementById('volume');
 
-// Установка громкости
-audio.volume = volumeControl.value;
+// Настройки
+audio.volume = 0.3; // Стандартная громкость 30%
 
-// Кнопка вкл/выкл
+// Флаг первого взаимодействия
+let userInteracted = false;
+
+// 1. Показываем кнопку-приглашение
+function showAudioPrompt() {
+  const prompt = document.createElement('div');
+  prompt.className = 'audio-prompt';
+  prompt.innerHTML = `
+    <p>Хотите включить фоновую музыку?</p>
+    <button id="enable-audio">Да, включить</button>
+  `;
+  document.body.appendChild(prompt);
+  
+  document.getElementById('enable-audio').addEventListener('click', () => {
+    initAudio();
+    prompt.remove();
+  });
+}
+
+// 2. Инициализация аудио
+function initAudio() {
+  userInteracted = true;
+  audio.play()
+    .then(() => {
+      soundBtn.textContent = '🔊';
+      console.log('Музыка запущена');
+    })
+    .catch(e => {
+      console.error('Ошибка воспроизведения:', e);
+      soundBtn.textContent = '🔇';
+    });
+}
+
+// 3. Клик по кнопке звука
 soundBtn.addEventListener('click', () => {
+  if (!userInteracted) {
+    initAudio();
+    return;
+  }
+  
   if (audio.paused) {
-    audio.play()
-      .then(() => soundBtn.textContent = '🔊')
-      .catch(e => console.log('Автозапуск заблокирован'));
+    audio.play();
+    soundBtn.textContent = '🔊';
   } else {
     audio.pause();
     soundBtn.textContent = '🔇';
   }
 });
 
-// Регулятор громкости
+// 4. Регулировка громкости
 volumeControl.addEventListener('input', () => {
   audio.volume = volumeControl.value;
 });
 
-// Автозапуск при первом клике по сайту
-document.addEventListener('click', initAudio, { once: true });
+// 5. Показываем приглашение через 5 секунд
+setTimeout(() => {
+  if (!userInteracted) {
+    showAudioPrompt();
+  }
+}, 5000);
 
-function initAudio() {
-  audio.play()
-    .then(() => soundBtn.textContent = '🔊')
-    .catch(e => console.log('Браузер заблокировал автозапуск'));
-}
+// 6. Автозапуск при любом клике на странице
+document.addEventListener('click', () => {
+  if (!userInteracted) {
+    initAudio();
+  }
+}, { once: true });
