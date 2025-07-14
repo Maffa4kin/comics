@@ -124,26 +124,7 @@ footer {
 }
 
 /* ===== АУДИОПЛЕЕР ===== */
-.simple-audio {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 100;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
 
-.simple-audio audio {
-    width: 200px;
-    transition: width 0.3s ease;
-}
-
-.simple-audio audio:hover {
-    width: 250px;
-}
 
 /* ===== АНИМАЦИИ ===== */
 @keyframes fadeIn {
