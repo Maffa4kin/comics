@@ -7,7 +7,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Ваш существующий контент -->
+  <!-- В начале <body>, перед всем контентом -->
+<div class="video-bg">
+  <video autoplay muted loop playsinline poster="comics/background-poster.jpg">
+    <source src="comics/background.mp4" type="video/mp4">
+    <!-- Фолбэк если видео не поддерживается -->
+    <img src="comics/background-poster.jpg" alt="Фоновое изображение">
+  </video>
+  <div class="video-overlay"></div>
+</div>
     <header>
         <h1>Комикс:Под Маской</h1>
         <p>Автор: ZARKI</p>
